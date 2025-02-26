@@ -1,0 +1,103 @@
+Base URL
+The base URL for accessing the Passport Application System API is:
+
+http://localhost:8080
+Authentication
+The application uses basic authentication for user login and registration. Users must register and log in to access their passport applications.
+
+Swagger UI
+For interactive API documentation and testing, you can use Swagger UI. It can be accessed at the following URL:
+
+bash
+ 
+http://localhost:8080/swagger-ui.html
+API Endpoints
+1. User Registration and Login
+POST /users/register
+Description: Allows a new user to register with their personal details.
+Request Body:
+json
+ 
+{
+  "username": "johndoe",
+  "password": "password123",
+  "email": "johndoe@example.com",
+  "phoneNumber": "1234567890"
+}
+Response:
+200 OK: User successfully registered.
+400 Bad Request: Invalid input data.
+
+POST /users/login
+Description: Allows a user to log in using their username and password.
+Request Body:
+json
+ 
+{
+  "username": "johndoe",
+  "password": "password123"
+}
+Response:
+200 OK: Successfully logged in.
+401 Unauthorized: Invalid credentials.
+2. Passport Application Submission
+POST /passport/apply
+Description: Submit a new passport application with personal details and documents.
+Request Body:
+json
+ 
+{
+  "fullName": "John Doe",
+  "address": "123 Main St, Springfield",
+  "identityProof": "ID Card",
+  "certificate": "Birth Certificate",
+  "status": "Pending"
+}
+Response:
+200 OK: Passport application successfully submitted.
+400 Bad Request: Invalid application data.
+3. Police Verification
+POST /passport/verify
+Description: Start the police verification process for the submitted passport application.
+Request Body:
+json
+ 
+{
+  "passportApplicationId": 1
+}
+Response:
+200 OK: Police verification successfully initiated.
+404 Not Found: Passport application not found.
+4. Passport Dispatch
+POST /passport/dispatch
+Description: Dispatch the passport after it is issued.
+Request Body:
+json
+ 
+{
+  "passportApplicationId": 1,
+  "trackingNumber": "TRACK123456"
+}
+Response:
+200 OK: Passport successfully dispatched.
+404 Not Found: Passport application not found.
+5. Passport Renewal
+POST /passport/renew
+Description: Apply for a renewal of an expired or about-to-expire passport.
+Request Body:
+json
+ 
+{
+  "passportApplicationId": 1
+}
+Response:
+200 OK: Passport successfully renewed.
+404 Not Found: Passport application not found.
+6. Get User Applications
+GET /passport/applications/{userId}
+Description: Get all passport applications for a specific user.
+Path Variables:
+userId (Long): The ID of the user whose passport applications are to be retrieved.
+Response:
+200 OK: A list of passport applications for the user.
+404 Not Found: User not found.
